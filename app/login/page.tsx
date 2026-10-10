@@ -131,33 +131,6 @@ function LoginFormContent() {
           </button>
         </form>
 
-        <div className="p-3.5 rounded-xl border-2 border-neutral-900 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/80 text-xs text-neutral-600 dark:text-neutral-400 space-y-2">
-          <div className="font-sans font-bold text-neutral-900 dark:text-white text-xs flex items-center justify-between">
-            <span>⚡ Quick Demo Login:</span>
-            <span className="text-[10px] text-neutral-500 font-normal">(Tap to auto-fill)</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <button
-              type="button"
-              onClick={() => { setEmail('abcd@gmail.com'); setPassword('password123'); }}
-              className="p-2 text-left rounded-lg border border-neutral-900 dark:border-neutral-600 bg-white dark:bg-neutral-900 hover:bg-[#34A853]/15 transition-all shadow-[2px_2px_0px_0px_#1e1e1e] active:translate-x-0.5 active:translate-y-0.5"
-            >
-              <div className="font-bold text-neutral-900 dark:text-white">Demo User</div>
-              <div className="font-mono text-[11px] text-neutral-500 truncate">abcd@gmail.com</div>
-              <div className="font-mono text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">pass: password123</div>
-            </button>
-            <button
-              type="button"
-              onClick={() => { setEmail('admin@gdgrbu.com'); setPassword('admin123'); }}
-              className="p-2 text-left rounded-lg border border-neutral-900 dark:border-neutral-600 bg-white dark:bg-neutral-900 hover:bg-[#4285F4]/15 transition-all shadow-[2px_2px_0px_0px_#1e1e1e] active:translate-x-0.5 active:translate-y-0.5"
-            >
-              <div className="font-bold text-neutral-900 dark:text-white">Admin Lead</div>
-              <div className="font-mono text-[11px] text-neutral-500 truncate">admin@gdgrbu.com</div>
-              <div className="font-mono text-[10px] text-blue-600 dark:text-blue-400 font-semibold">pass: admin123</div>
-            </button>
-          </div>
-        </div>
-
         <div className="text-center pt-2 text-xs font-semibold text-neutral-500">
           Don&apos;t have an account yet?{' '}
           <Link href="/register" className="text-[#4285F4] font-black hover:underline">
