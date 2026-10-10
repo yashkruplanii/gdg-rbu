@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { LogIn, Mail, Lock, AlertCircle, Sparkles } from 'lucide-react';
+import { LogIn, Mail, Lock, AlertCircle, Sparkles, Eye, EyeOff } from 'lucide-react';
 
 function LoginFormContent() {
   const router = useRouter();
@@ -12,6 +12,7 @@ function LoginFormContent() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -84,14 +85,24 @@ function LoginFormContent() {
             <label className="text-xs font-black uppercase tracking-wider text-neutral-700 dark:text-neutral-300 flex items-center gap-1.5">
               <Lock className="w-3.5 h-3.5 text-[#EA4335]" /> Password
             </label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-xl border-2 border-neutral-900 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm font-medium focus:outline-none focus:border-[#4285F4]"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full px-4 py-3 pr-11 rounded-xl border-2 border-neutral-900 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm font-medium focus:outline-none focus:border-[#4285F4]"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white p-1 rounded-lg transition-colors"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
           </div>
 
           <button
@@ -103,12 +114,14 @@ function LoginFormContent() {
           </button>
         </form>
 
-        <div className="p-3.5 rounded-xl border border-dashed border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/60 text-xs text-neutral-600 dark:text-neutral-400 space-y-1 font-mono">
-          <div className="font-sans font-bold text-neutral-700 dark:text-neutral-300 text-[11px] mb-1">
-            ⚡ Quick Demo Admin:
+        <div className="p-3.5 rounded-xl border border-dashed border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/60 text-xs text-neutral-600 dark:text-neutral-400 space-y-2 font-mono">
+          <div className="font-sans font-bold text-neutral-700 dark:text-neutral-300 text-[11px]">
+            ⚡ Quick Demo Accounts:
           </div>
-          <div>Email: <span className="font-bold text-neutral-900 dark:text-white">admin@gdgrbu.com</span></div>
-          <div>Password: <span className="font-bold text-neutral-900 dark:text-white">admin123</span></div>
+          <div className="text-[11px] space-y-0.5">
+            <div><span className="font-bold text-neutral-900 dark:text-white">Admin:</span> admin@gdgrbu.com | admin123</div>
+            <div><span className="font-bold text-neutral-900 dark:text-white">Student:</span> yash@rbu.edu | password123</div>
+          </div>
         </div>
 
         <div className="text-center pt-2 text-xs font-semibold text-neutral-500">
