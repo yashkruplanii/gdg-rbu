@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fdfdfd;
+  --foreground: #121212;
+  --grid-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --background: #0f1117;
+  --foreground: #f3f4f6;
+  --grid-color: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, var(--grid-color) 1.5px, transparent 1.5px);
+  background-size: 40px 40px;
+  min-height: 100vh;
+}
+
+.font-pixel {
+  font-family: 'Silkscreen', monospace, sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Custom Neo-Brutalist utility classes */
+.neo-box {
+  border: 2.5px solid #000000;
+  box-shadow: 4px 4px 0px 0px #000000;
+  transition: all 0.15s ease-in-out;
+}
+
+.dark .neo-box {
+  border: 2.5px solid #ffffff;
+  box-shadow: 4px 4px 0px 0px #4285F4;
+}
+
+.neo-box-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+.dark .neo-box-hover:hover {
+  box-shadow: 6px 6px 0px 0px #4285F4;
+}
+
+.neo-btn {
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px 0px #000000;
+  font-weight: 800;
+  transition: all 0.1s ease-in-out;
+}
+
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #000000;
+}
+
+.dark .neo-btn {
+  border: 2px solid #ffffff;
+  box-shadow: 3px 3px 0px 0px #4285F4;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+/* Print Styles for QR Ticket Pass */
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #printable-ticket-pass, #printable-ticket-pass * {
+    visibility: visible !important;
+  }
+
+  #printable-ticket-pass {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 400px !important;
+    margin: 0 auto !important;
+    border: 3px solid #000000 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 24px !important;
+    border-radius: 24px !important;
+    page-break-inside: avoid !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

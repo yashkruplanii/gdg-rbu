@@ -1,0 +1,49 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String         @unique
+  passwordHash  String
+  role          String         @default("USER") // "USER" | "ADMIN"
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  registrations Registration[]
+}
+
+model Event {
+  id            String         @id @default(cuid())
+  title         String
+  description   String
+  date          String         // e.g. "2026-10-15"
+  time          String         // e.g. "03:00 PM"
+  venue         String         // e.g. "RBU Auditorium / Online"
+  capacity      Int            @default(100)
+  category      String         @default("Workshop") // "Workshop" | "Hackathon" | "Tech Talk" | "Orientation" | "Web3" | "AI/ML"
+  image         String?        // Image URL
+  featured      Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  registrations Registration[]
+}
+
+model Registration {
+  id           String   @id @default(cuid())
+  userId       String
+  eventId      String
+  qrToken      String   @unique @default(cuid())
+  status       String   @default("CONFIRMED") // "CONFIRMED" | "CANCELLED"
+  registeredAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+}

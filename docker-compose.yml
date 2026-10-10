@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:./dev.db
+      - AUTH_SECRET=gdg_rbu_secret_jwt_key_super_secure_2026_dev_mode
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    volumes:
+      - ./prisma:/app/prisma
