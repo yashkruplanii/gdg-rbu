@@ -1,4 +1,3 @@
-# Production Dockerfile for GDG RBU EventHub
 FROM node:20-alpine AS base
 
 WORKDIR /app
