@@ -10,16 +10,18 @@ function LoginFormContent() {
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get('redirect') || '/dashboard';
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(searchParams.get('email') || '');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notRegistered, setNotRegistered] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setNotRegistered(false);
 
     try {
       const res = await fetch('/api/auth/login', {
@@ -31,6 +33,9 @@ function LoginFormContent() {
       const data = await res.json();
 
       if (!res.ok) {
+        if (data.notRegistered) {
+          setNotRegistered(true);
+        }
         throw new Error(data.error || 'Failed to log in');
       }
 
@@ -60,9 +65,21 @@ function LoginFormContent() {
         </div>
 
         {error && (
-          <div className="flex items-center gap-2 p-3.5 rounded-xl border-2 border-red-500 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs font-bold">
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-            <span>{error}</span>
+          <div className="p-3.5 rounded-xl border-2 border-red-500 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs font-bold space-y-2">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <span>{error}</span>
+            </div>
+            {notRegistered && (
+              <div className="pt-1">
+                <Link
+                  href={`/register?email=${encodeURIComponent(email)}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 border-neutral-900 dark:border-white bg-[#34A853] text-white hover:bg-emerald-600 transition-all font-black text-xs shadow-[2px_2px_0px_0px_#1e1e1e]"
+                >
+                  Create Account with this Email →
+                </Link>
+              </div>
+            )}
           </div>
         )}
 

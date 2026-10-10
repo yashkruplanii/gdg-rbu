@@ -1,24 +1,28 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { UserPlus, User, Mail, Lock, AlertCircle, Sparkles, Eye, EyeOff } from 'lucide-react';
 
-export default function RegisterPage() {
+function RegisterFormContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialEmail = searchParams.get('email') || '';
 
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setAlreadyRegistered(false);
 
     try {
       const res = await fetch('/api/auth/register', {
@@ -30,6 +34,9 @@ export default function RegisterPage() {
       const data = await res.json();
 
       if (!res.ok) {
+        if (res.status === 409 || data.error?.toLowerCase().includes('already exists')) {
+          setAlreadyRegistered(true);
+        }
         throw new Error(data.error || 'Registration failed');
       }
 
@@ -59,9 +66,21 @@ export default function RegisterPage() {
         </div>
 
         {error && (
-          <div className="flex items-center gap-2 p-3.5 rounded-xl border-2 border-red-500 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs font-bold">
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
-            <span>{error}</span>
+          <div className="p-3.5 rounded-xl border-2 border-red-500 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs font-bold space-y-2">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <span>{error}</span>
+            </div>
+            {alreadyRegistered && (
+              <div className="pt-1">
+                <Link
+                  href={`/login?email=${encodeURIComponent(email)}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 border-neutral-900 dark:border-white bg-[#4285F4] text-white hover:bg-blue-600 transition-all font-black text-xs shadow-[2px_2px_0px_0px_#1e1e1e]"
+                >
+                  Log In with this Account →
+                </Link>
+              </div>
+            )}
           </div>
         )}
 
@@ -89,7 +108,7 @@ export default function RegisterPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. student@rbu.edu"
+              placeholder="e.g. yashkruplanii@gmail.com"
               className="w-full px-4 py-3 rounded-xl border-2 border-neutral-900 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm font-medium focus:outline-none focus:border-[#4285F4]"
             />
           </div>
@@ -137,5 +156,13 @@ export default function RegisterPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div className="text-center py-20 font-bold">Loading...</div>}>
+      <RegisterFormContent />
+    </Suspense>
   );
 }

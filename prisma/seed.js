@@ -49,7 +49,16 @@ async function main() {
     },
   });
 
-  console.log('✅ Created demo users: admin@gdgrbu.com, yash@rbu.edu, abcd@gmail.com');
+  const yashPersonal = await prisma.user.create({
+    data: {
+      name: 'Yash Kruplani',
+      email: 'yashkruplanii@gmail.com',
+      passwordHash: userPasswordHash,
+      role: 'ADMIN',
+    },
+  });
+
+  console.log('✅ Created demo users: admin@gdgrbu.com, yash@rbu.edu, abcd@gmail.com, yashkruplanii@gmail.com');
 
   const event1 = await prisma.event.create({
     data: {

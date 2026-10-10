@@ -22,15 +22,15 @@ export async function POST(req: NextRequest) {
 
     if (!user) {
       return NextResponse.json(
-        { error: 'Invalid email or password' },
-        { status: 401 }
+        { error: 'No account found with this email. Please register first.', notRegistered: true },
+        { status: 404 }
       );
     }
 
     const isMatch = await comparePassword(password, user.passwordHash);
     if (!isMatch) {
       return NextResponse.json(
-        { error: 'Invalid email or password' },
+        { error: 'Incorrect password. Please check your password and try again.' },
         { status: 401 }
       );
     }
