@@ -31,7 +31,7 @@ const FAQS = [
   },
   {
     q: 'How can I join the GDG Core Organizing Team?',
-    a: 'We conduct recruitment drives at the beginning of each academic semester. Complete the assignment tasks (like this EventHub web dev project) and participate in our technical interview rounds.',
+    a: 'We conduct recruitment drives at the beginning of each academic semester. Complete the technical recruitment tasks and participate in our interview rounds.',
   },
 ];
 
@@ -87,7 +87,7 @@ export default function FAQPage() {
         <div>
           <h3 className="font-black text-lg">Still have questions?</h3>
           <p className="text-xs font-bold text-neutral-800">
-            Ask our built-in AI assistant Sparky or email the organizing team directly!
+            Have questions or need help? Reach out directly to the chapter organizers!
           </p>
         </div>
         <a
