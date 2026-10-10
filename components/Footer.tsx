@@ -78,9 +78,6 @@ export function Footer() {
               <span className="px-2.5 py-1 text-xs font-bold rounded-lg border border-neutral-900 dark:border-neutral-700 bg-[#4285F4]/15 text-[#4285F4]">
                 Web & Cloud
               </span>
-              <span className="px-2.5 py-1 text-xs font-bold rounded-lg border border-neutral-900 dark:border-neutral-700 bg-[#EA4335]/15 text-[#EA4335]">
-                AI & Gemini
-              </span>
             </div>
           </div>
 
