@@ -127,8 +127,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to explore t
 
 | Role | Email | Password | Access Level |
 | :--- | :--- | :--- | :--- |
+| **Demo Member** | `abcd@gmail.com` | `password123` | Event browsing, one-click registration, digital QR ticket pass access |
 | **Admin Lead** | `admin@gdgrbu.com` | `admin123` | Full admin privileges (Create/Edit/Delete events, View all attendees) |
-| **Student Member** | `yash@rbu.edu` | `password123` | Event browsing, one-click registration, digital QR ticket pass access |
 
 *(You can also freely register any new account using the on-screen Register modal!)*
 

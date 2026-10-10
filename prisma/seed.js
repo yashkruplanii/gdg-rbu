@@ -40,7 +40,16 @@ async function main() {
     },
   });
 
-  console.log('✅ Created demo users: admin@gdgrbu.com & yash@rbu.edu');
+  const abcd = await prisma.user.create({
+    data: {
+      name: 'Demo Student',
+      email: 'abcd@gmail.com',
+      passwordHash: userPasswordHash,
+      role: 'USER',
+    },
+  });
+
+  console.log('✅ Created demo users: admin@gdgrbu.com, yash@rbu.edu, abcd@gmail.com');
 
   const event1 = await prisma.event.create({
     data: {

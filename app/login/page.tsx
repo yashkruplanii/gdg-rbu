@@ -76,7 +76,7 @@ function LoginFormContent() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. yash@rbu.edu"
+              placeholder="e.g. abcd@gmail.com"
               className="w-full px-4 py-3 rounded-xl border-2 border-neutral-900 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm font-medium focus:outline-none focus:border-[#4285F4]"
             />
           </div>
@@ -114,13 +114,30 @@ function LoginFormContent() {
           </button>
         </form>
 
-        <div className="p-3.5 rounded-xl border border-dashed border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/60 text-xs text-neutral-600 dark:text-neutral-400 space-y-2 font-mono">
-          <div className="font-sans font-bold text-neutral-700 dark:text-neutral-300 text-[11px]">
-            ⚡ Quick Demo Accounts:
+        <div className="p-3.5 rounded-xl border-2 border-neutral-900 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/80 text-xs text-neutral-600 dark:text-neutral-400 space-y-2">
+          <div className="font-sans font-bold text-neutral-900 dark:text-white text-xs flex items-center justify-between">
+            <span>⚡ Quick Demo Login:</span>
+            <span className="text-[10px] text-neutral-500 font-normal">(Tap to auto-fill)</span>
           </div>
-          <div className="text-[11px] space-y-0.5">
-            <div><span className="font-bold text-neutral-900 dark:text-white">Admin:</span> admin@gdgrbu.com | admin123</div>
-            <div><span className="font-bold text-neutral-900 dark:text-white">Student:</span> yash@rbu.edu | password123</div>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <button
+              type="button"
+              onClick={() => { setEmail('abcd@gmail.com'); setPassword('password123'); }}
+              className="p-2 text-left rounded-lg border border-neutral-900 dark:border-neutral-600 bg-white dark:bg-neutral-900 hover:bg-[#34A853]/15 transition-all shadow-[2px_2px_0px_0px_#1e1e1e] active:translate-x-0.5 active:translate-y-0.5"
+            >
+              <div className="font-bold text-neutral-900 dark:text-white">Demo User</div>
+              <div className="font-mono text-[11px] text-neutral-500 truncate">abcd@gmail.com</div>
+              <div className="font-mono text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">pass: password123</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => { setEmail('admin@gdgrbu.com'); setPassword('admin123'); }}
+              className="p-2 text-left rounded-lg border border-neutral-900 dark:border-neutral-600 bg-white dark:bg-neutral-900 hover:bg-[#4285F4]/15 transition-all shadow-[2px_2px_0px_0px_#1e1e1e] active:translate-x-0.5 active:translate-y-0.5"
+            >
+              <div className="font-bold text-neutral-900 dark:text-white">Admin Lead</div>
+              <div className="font-mono text-[11px] text-neutral-500 truncate">admin@gdgrbu.com</div>
+              <div className="font-mono text-[10px] text-blue-600 dark:text-blue-400 font-semibold">pass: admin123</div>
+            </button>
           </div>
         </div>
 

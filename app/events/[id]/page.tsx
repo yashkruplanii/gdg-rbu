@@ -70,6 +70,10 @@ export default function EventDetailPage() {
       const data = await res.json();
 
       if (!res.ok) {
+        if (res.status === 401) {
+          router.push(`/login?redirect=/events/${eventId}`);
+          return;
+        }
         throw new Error(data.error || 'Failed to register');
       }
 

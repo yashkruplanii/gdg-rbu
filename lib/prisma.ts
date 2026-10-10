@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import path from 'path';
+import { DB_BASE64 } from './dbSeed';
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -11,22 +12,13 @@ function getPrismaClient(): PrismaClient {
 
   if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
     const tmpDbPath = '/tmp/dev.db';
-    if (!fs.existsSync(tmpDbPath)) {
-      const candidates = [
-        path.join(process.cwd(), 'prisma', 'dev.db'),
-        path.join(__dirname, '..', 'prisma', 'dev.db'),
-        path.join(process.cwd(), '.next', 'server', 'prisma', 'dev.db'),
-      ];
-      for (const candidate of candidates) {
-        if (fs.existsSync(candidate)) {
-          try {
-            fs.copyFileSync(candidate, tmpDbPath);
-            break;
-          } catch (e) {
-            console.error('Failed to copy SQLite database to /tmp:', e);
-          }
-        }
+    try {
+      if (!fs.existsSync(tmpDbPath) || fs.statSync(tmpDbPath).size === 0) {
+        const buffer = Buffer.from(DB_BASE64, 'base64');
+        fs.writeFileSync(tmpDbPath, buffer);
       }
+    } catch (e) {
+      console.error('Failed to initialize /tmp/dev.db:', e);
     }
     dbUrl = `file:${tmpDbPath}`;
   }
