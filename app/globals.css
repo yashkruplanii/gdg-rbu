@@ -36,7 +36,6 @@ body {
   font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Custom Neo-Brutalist utility classes */
 .neo-box {
   border: 2.5px solid #000000;
   box-shadow: 4px 4px 0px 0px #000000;
@@ -79,7 +78,6 @@ body {
   box-shadow: 3px 3px 0px 0px #4285F4;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -95,7 +93,6 @@ body {
   background: #333;
 }
 
-/* Print Styles for QR Ticket Pass */
 @media print {
   html, body {
     background: #ffffff !important;

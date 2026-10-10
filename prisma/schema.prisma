@@ -12,7 +12,7 @@ model User {
   name          String
   email         String         @unique
   passwordHash  String
-  role          String         @default("USER") // "USER" | "ADMIN"
+  role          String         @default("USER")
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   registrations Registration[]
@@ -22,12 +22,12 @@ model Event {
   id            String         @id @default(cuid())
   title         String
   description   String
-  date          String         // e.g. "2026-10-15"
-  time          String         // e.g. "03:00 PM"
-  venue         String         // e.g. "RBU Auditorium / Online"
+  date          String
+  time          String
+  venue         String
   capacity      Int            @default(100)
-  category      String         @default("Workshop") // "Workshop" | "Hackathon" | "Tech Talk" | "Orientation" | "Web3" | "AI/ML"
-  image         String?        // Image URL
+  category      String         @default("Workshop")
+  image         String?
   featured      Boolean        @default(false)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -39,7 +39,7 @@ model Registration {
   userId       String
   eventId      String
   qrToken      String   @unique @default(cuid())
-  status       String   @default("CONFIRMED") // "CONFIRMED" | "CANCELLED"
+  status       String   @default("CONFIRMED")
   registeredAt DateTime @default(now())
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
