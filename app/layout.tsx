@@ -3,7 +3,6 @@ import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { AIEventAssistant } from '@/components/AIEventAssistant';
 
 export const metadata: Metadata = {
   title: 'GDG RBU — Google Developer Groups',
@@ -29,7 +28,6 @@ export default function RootLayout({
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {children}
           </main>
-          <AIEventAssistant />
           <Footer />
         </ThemeProvider>
       </body>
