@@ -47,7 +47,6 @@ export function Navbar() {
     { name: 'Team', href: '/team', bg: 'bg-[#EA4335] text-white', hover: 'hover:bg-[#EA4335] hover:text-white' },
     { name: 'Events', href: '/events', bg: 'bg-[#FBBC05] text-neutral-900', hover: 'hover:bg-[#FBBC05] hover:text-neutral-900' },
     { name: 'Gallery', href: '/gallery', bg: 'bg-[#34A853] text-white', hover: 'hover:bg-[#34A853] hover:text-white' },
-    { name: 'Portfolio', href: '/team', bg: 'bg-[#6C5CE7] text-white', hover: 'hover:bg-[#6C5CE7] hover:text-white' },
     { name: 'More', href: '/faq', bg: 'bg-[#00A8FF] text-white', hover: 'hover:bg-[#00A8FF] hover:text-white' },
   ];
 
